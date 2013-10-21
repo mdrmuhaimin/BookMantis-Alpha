@@ -1,0 +1,261 @@
+
+
+
+
+
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<title>BookMantis - The Revolution is Here</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+    <meta name="author" content="">
+	<!-- media-queries.js (fallback) -->
+		<!--[if lt IE 9]>
+			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>			
+		<![endif]-->
+
+		<!-- html5.js -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--stylesheets-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" >	
+	<link rel="stylesheet" href="css/supersized.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" >
+	
+	<!--<link rel="icon" type="image/x-icon" href="images/favicon.ico" />-->
+	<!--js-->
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>	
+	
+	<script>
+	/* <![CDATA[ */
+		$(document).ready(function(){
+			
+			var left = $('.newsletter').offset().left;
+
+			$("#subscribe").click(function(event){
+
+			$(".newsletter").show().animate({ left : left }, { duration: 1000 });
+
+				event.preventDefault();
+				return false;				
+			});
+			
+			$(".close1").click(function(event){
+						
+			$(".newsletter").animate({ left : "110%" }, { duration: 1000 });
+
+				event.preventDefault();
+				return false;				
+			});
+			
+			$("#send").click(function(){
+				var cname = $(this).parent().find("#name").val() ;
+				var cemail = $(this).parent().find("#email").val() ;
+				var errcount=0;
+				  if(cname.length < 1)
+				  {		
+				  $(this).parent().find("#name").addClass("error");
+				  errcount = 1;
+				  }	else
+				   $(this).parent().find("#name").removeClass("error");
+				   
+				var emailRegex = new RegExp(/^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/i);
+				var valid = emailRegex.test(cemail);
+				if (!valid) {
+					$(this).parent().find("#email").addClass("error");
+					errcount = 1;
+				}else
+					$(this).parent().find("#email").removeClass("error");
+				
+				  if(errcount ==0 )
+				  {
+					$.post("contact.php", $('#signupform').serialize(), function(data){  
+					
+					
+					    $('#signupform').slideUp("slow", function() {                    
+					        $(this).before('<h4 class="successmessage"><strong>Thanks!</strong> You are now equipped for the revolution.</h4>'); 
+					        
+					        $('.successmessage').slideDown('slow'); 
+					        });  
+					    });
+					
+					
+				  }
+				  else
+				  {	  	  
+				  return false;
+				  }
+		
+			});	
+			$("a[data-rel^='prettyPhoto']").prettyPhoto({deeplinking:false});
+			
+			$(window).resize(function(){
+			var height=$('.activeslide').height();
+			var sidebarheight=$('.sidebar').height();
+
+				$('.sidebar').css('min-height',height);
+			});	
+			$(window).resize();
+		});
+	/* ]]> */
+	</script>
+	
+	
+	
+	
+</head>
+
+<body>
+		<div class="row-fluid container1">
+				<div class="span4 sidebar">
+					<div class="innersidebar">
+					<h1 class="bold">The Revolution is here. <br/><a href="#" id="subscribe">Sign Up</a> now!</h1>
+					
+					<div class="row-fluid work">
+						<div class="logo">
+							
+						</div>	
+					</div><!--work-->
+					
+										<!--newsletter-->
+					<div class="newsletter">
+						<div class="newsheading">
+							<h1>Stay updated</h1>
+							<h2>get ready for launch</h2>
+						</div>
+						<div class="centernewsletter">
+							<form method="post" id="signupform" action="contact.php">	
+								<input type="text" name="name" id="name" placeholder="Name"><br>
+								<input type="email" name="email" id="email" placeholder="Email@address.com"><br>
+								<a href="#" id="send">Subscribe</a>
+							</form>
+							
+							<a href="#" class="close1"></a>
+						</div>	
+					</div><!--span4-->
+				
+				</div>	
+				
+					<div class="social">
+						<p>Follow us on social media</p>
+						<div class="socialbox">
+					
+							<ul>
+								
+								<!--
+								<li class="amazon">
+									<a href="#"><img src="img/icons/social/amazon.png" alt=""></a>
+								</li>
+								
+								<li class="app-store">
+									<a href="#"><img src="img/icons/social/app-store.png" alt=""></a>
+								</li>
+								
+								<li class="behance">
+									<a href="#"><img src="img/icons/social/behance.png" alt=""></a>
+								</li>
+								
+								<li class="blogger">
+									<a href="#"><img src="img/icons/social/blogger.png" alt=""></a>
+								</li>
+								
+								<li class="deviantart">
+									<a href="#"><img src="img/icons/social/deviantart.png" alt=""></a>
+								</li>
+								
+								<li class="myspace">
+									<a href="#"><img src="img/icons/social/myspace.png" alt=""></a>
+								</li>
+								
+								<li class="paypal">
+									<a href="#"><img src="img/icons/social/paypal.png" alt=""></a>
+								</li>
+								
+								<li class="pinterest">
+									<a href="#"><img src="img/icons/social/pinterest.png" alt=""></a>
+								</li>
+								
+								<li class="rss">
+									<a href="#"><img src="img/icons/social/rss.png" alt=""></a>
+								</li>
+								
+								<li class="skype">
+									<a href="#"><img src="img/icons/social/skype.png" alt=""></a>
+								</li>
+								
+								<li class="stumbleupon">
+									<a href="#"><img src="img/icons/social/stumbleupon.png" alt=""></a>
+								</li>
+								
+								<li class="tumblr">
+									<a href="#"><img src="img/icons/social/tumblr.png" alt=""></a>
+								</li>
+								
+								<li class="wordpress">
+									<a href="#"><img src="img/icons/social/wordpress.png" alt=""></a>
+								</li>
+								
+								<li class="yahoo">
+									<a href="#"><img src="img/icons/social/yahoo.png" alt=""></a>
+								</li>
+								-->
+								
+								<li class="twitter">
+									<a href="https://twitter.com/BookMantis"><img src="icons/social/twitter.png" alt=""></a>
+								</li>
+								
+								<li class="facebook">
+									<a href="https://www.facebook.com/bo.mantis?fref=ts"><img src="icons/social/facebook.png" alt=""></a>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+					
+
+					
+				</div><!--span4-->
+				
+
+				
+		</div><!--row-fluid-->
+	
+
+	
+	
+<!--js-->	
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/supersized.3.2.7.js"></script>
+<script type="text/javascript" src="js/supersized.shutter.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */			
+jQuery(function($){
+				
+	$.supersized({			
+		// Functionality
+		slide_interval   : 5000,		// Length between transitions
+		transition       : 1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+		transition_speed : 1000,		// Speed of transition														   
+		// Components							
+		slide_links		 : 'false',	
+		slides 			 : [			// Slideshow Images
+								  //set background images here (absolute path) //
+							{image : 'images/bg/book.jpg'},
+							{image : 'images/bg/book2.jpg'},
+							{image : 'images/bg/book3.jpg'},
+							{image : 'images/bg/book4.jpg'},
+							{image : 'images/bg/book5.jpg'}  //set background images here (absolute path) //
+							]					
+	});		
+});
+/* ]]> */	    
+</script>
+</body>
+</html>
+<!-- Localized -->
